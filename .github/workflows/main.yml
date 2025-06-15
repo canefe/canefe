@@ -13,16 +13,21 @@ jobs:
     timeout-minutes: 15
     environment:
       name: production
-    permissions:
-      contents: write
+    container:
+      image: ubuntu:22.04
     steps:
+      - name: Install dependencies
+        run: |
+          apt-get update && apt-get install -y git curl jq
+
+      - name: Setup Git
+        uses: actions/checkout@v3
+
       - name: left profile 
-        uses: stalomeow/metrics@edcae0f874d69e509d25ddd5e750a2f41cd54e10
+        uses: stalomeow/metrics@projects-v2
         with:
           token: ${{ secrets.METRICS_TOKEN }}
           filename: github-metrics-left.svg
-
-          # Options
           user: canefe
           template: classic
           base: header, activity, community
@@ -37,15 +42,13 @@ jobs:
           plugin_languages_categories: markup, programming
           plugin_languages_analysis_timeout: 30
           config_padding: 0, 8 + 11%
-          config_order: base.header, base.activity+community, languages #, anilist
+          config_order: base.header, base.activity+community, languages
 
       - name: right profile 
-        uses: stalomeow/metrics@edcae0f874d69e509d25ddd5e750a2f41cd54e10
+        uses: stalomeow/metrics@projects-v2
         with:
           token: ${{ secrets.METRICS_TOKEN }}
           filename: github-metrics-right.svg
-
-          # Options
           user: canefe
           template: classic
           base: ""
@@ -56,3 +59,4 @@ jobs:
           plugin_achievements_display: detailed
           config_padding: 0, 8 + 11%
           config_order: achievements
+
