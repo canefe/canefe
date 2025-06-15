@@ -17,7 +17,7 @@ jobs:
       contents: write
     steps:
       - name: left profile 
-        uses: mikey-/metrics
+        uses: mikey-/metrics@master
         with:
           token: ${{ secrets.METRICS_TOKEN }}
           filename: github-metrics-left.svg
