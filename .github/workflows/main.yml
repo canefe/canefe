@@ -16,14 +16,8 @@ jobs:
     permissions:
       contents: write
     steps:
-      - name: Force bust Docker cache
-        uses: actions/cache@v3
-        with:
-          path: /tmp/fake-cache-${{ github.run_id }}
-          key: docker-no-cache-${{ github.run_id }}
-
       - name: left profile 
-        uses: stalomeow/metrics@projects-v2
+        uses: mikey-/metrics
         with:
           token: ${{ secrets.METRICS_TOKEN }}
           filename: github-metrics-left.svg
@@ -44,7 +38,7 @@ jobs:
           config_order: base.header, base.activity+community, languages
 
       - name: right profile 
-        uses: stalomeow/metrics@projects-v2
+        uses: mikey-/metrics
         with:
           token: ${{ secrets.METRICS_TOKEN }}
           filename: github-metrics-right.svg
