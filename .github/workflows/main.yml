@@ -38,7 +38,7 @@ jobs:
           config_order: base.header, base.activity+community, languages
 
       - name: right profile 
-        uses: mikey-/metrics
+        uses: mikey-/metrics@master
         with:
           token: ${{ secrets.METRICS_TOKEN }}
           filename: github-metrics-right.svg
