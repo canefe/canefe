@@ -13,15 +13,14 @@ jobs:
     timeout-minutes: 15
     environment:
       name: production
-    container:
-      image: ubuntu:22.04
+    permissions:
+      contents: write
     steps:
-      - name: Install dependencies
-        run: |
-          apt-get update && apt-get install -y git curl jq
-
-      - name: Setup Git
-        uses: actions/checkout@v3
+      - name: Force bust Docker cache
+        uses: actions/cache@v3
+        with:
+          path: /tmp/fake-cache-${{ github.run_id }}
+          key: docker-no-cache-${{ github.run_id }}
 
       - name: left profile 
         uses: stalomeow/metrics@projects-v2
