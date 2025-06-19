@@ -16,16 +16,8 @@ jobs:
     permissions:
       contents: write
     steps:
-      - name: Set DEBIAN_FRONTEND to noninteractive
-        run: |
-          echo "DEBIAN_FRONTEND=noninteractive" | sudo tee -a /etc/environment
-          sudo apt-get update # Run apt update to refresh package lists
-      - name: Clean apt cache and remove old lists
-        run: |
-          sudo apt-get clean
-          sudo rm -rf /var/lib/apt/lists/*
       - name: left profile 
-        uses: stalomeow/metrics@projects-v2
+        uses: gh-metrics/metrics
         with:
           token: ${{ secrets.METRICS_TOKEN }}
           filename: github-metrics-left.svg
@@ -46,7 +38,7 @@ jobs:
           config_order: base.header, base.activity+community, languages
 
       - name: right profile 
-        uses: stalomeow/metrics@projects-v2
+        uses: gh-metrics/metrics
         with:
           token: ${{ secrets.METRICS_TOKEN }}
           filename: github-metrics-right.svg
